@@ -3,10 +3,10 @@ package fitnesCalendar.gui;
 import java.awt.Component;
 import java.awt.FlowLayout;
 
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
+
+import fitnesCalendar.basics.CalendarEntry;
 
 public class CalendarEntryRenderer implements TableCellRenderer {
 
@@ -15,19 +15,13 @@ public class CalendarEntryRenderer implements TableCellRenderer {
       int row, int column) {
     // TODO Auto-generated method stub
     
-    JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    CalendarEntry entry = (CalendarEntry)value;
     
-    if(value != null) {
-    Integer val = (Integer)value;
-    System.out.println(value);
-    JLabel showButton = new JLabel(value.toString());
-    
-    panel.add(showButton);
-    }
+    CalendarEntryPanel panel = new CalendarEntryPanel(new FlowLayout(FlowLayout.LEFT), entry);
     
     if (isSelected) {
       panel.setBackground(table.getSelectionBackground());
-    }else{
+    } else {
       panel.setBackground(table.getBackground());
     }
     
