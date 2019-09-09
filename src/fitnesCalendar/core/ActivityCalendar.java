@@ -1,5 +1,6 @@
 package fitnesCalendar.core;
 
+import java.time.LocalDate;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -8,39 +9,42 @@ import fitnesCalendar.basics.CalendarEntry;
 //TODO: make this a singkleton class
 public class ActivityCalendar {
 
-  static int actualDay, actualYear, actualMonth, 
-             currentMonth, currentYear;
+  static int currentMonth, currentYear;
+  static LocalDate actualDate;
   private GregorianCalendar currentCal;
-  
-  public ActivityCalendar() {
+
+  private static ActivityCalendar calendarInstance = null;
+
+  public static ActivityCalendar getInstance() {
+    if(calendarInstance != null) {
+      return calendarInstance;
+    } 
+    calendarInstance = new ActivityCalendar();
+    return calendarInstance;
+
+  }
+
+  private ActivityCalendar() {
     GregorianCalendar cal = new GregorianCalendar(); //Create calendar
-    actualDay = cal.get(GregorianCalendar.DAY_OF_MONTH); //Get day
-    currentMonth = actualMonth = cal.get(GregorianCalendar.MONTH); //Get month
-    currentYear = actualYear = cal.get(GregorianCalendar.YEAR); //Get year
+    currentMonth  = cal.get(GregorianCalendar.MONTH); //Get month
+    currentYear = cal.get(GregorianCalendar.YEAR); //Get year
+    actualDate = LocalDate.of(cal.get(GregorianCalendar.YEAR),  cal.get(GregorianCalendar.MONTH) +1, cal.get(GregorianCalendar.DAY_OF_MONTH));
+    System.out.println("Today is: " + actualDate);
     updateCurrentCalendar();  
-    System.out.println("actualDay " + actualDay + "actualMonth " + actualMonth + " actualYear: " + actualYear);   
   }
-  
-  public int getActualDay() {
-    return actualDay;
-  }
-  
-  public int getActualMonth() {
-    return actualMonth;
-  }
-  
-  public int getActualYear() {
-    return actualYear;
+
+  public boolean isActualDate(LocalDate date) {
+    return actualDate.equals(date);
   }
   
   public int getCurrentMonth() {
     return currentMonth;
   }
-  
+
   public int getCurrentYear() {
     return currentYear;
   }
-  
+
   public void increaseMonth() {
     currentMonth++;
     if(currentMonth == 12) {
@@ -49,7 +53,7 @@ public class ActivityCalendar {
     }
     updateCurrentCalendar();
   }
-  
+
   public void decreaseMonth() {
     currentMonth--;
     if(currentMonth < 0) {
@@ -58,11 +62,11 @@ public class ActivityCalendar {
     }
     updateCurrentCalendar();
   }
-  
+
   public int getCurrentMonthNofDays() {
     return currentCal.getActualMaximum(GregorianCalendar.DAY_OF_MONTH);
   }
-  
+
   public int getCurrentMonthStartDay() {
     int som = currentCal.get(GregorianCalendar.DAY_OF_WEEK) - 1;
     if (som == 0) {
@@ -70,14 +74,14 @@ public class ActivityCalendar {
     }
     return som;
   }
-  
+
   public List<CalendarEntry> getEntriesForMonth (int month) {
     int tmp = month;
     return null;
   }
-  
+
   private void updateCurrentCalendar() {
     currentCal = new GregorianCalendar(currentYear, currentMonth, 1); 
   }
-  
+
 }

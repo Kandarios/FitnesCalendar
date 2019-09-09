@@ -14,18 +14,14 @@ import javax.swing.JMenuItem;
 public class MainWindow {
 
   private JFrame frame;
-//  private CalendarDB calendarDB = CalendarDB.getInstance();
+  //  private CalendarDB calendarDB = CalendarDB.getInstance();
 
   /**
    * Create the application.
    */
   public MainWindow() {
     frame = new JFrame("Betreuer Verwaltung");
-    frame.setSize(1075, 1051);
-    frame.setContentPane(new CalendarPanel());
-//    pane = frame.getContentPane();
     initializeMenuBar();
-    this.frame.setVisible(true);
     createGui();
   }
 
@@ -34,22 +30,39 @@ public class MainWindow {
     JMenuBar menuBar = new JMenuBar();
     frame.setJMenuBar(menuBar);
 
-    JMenu mnFile = new JMenu("Datei");
-    mnFile.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-    menuBar.add(mnFile);
+    JMenu menuDatei = new JMenu("Datei");
+    menuDatei.setFont(new Font("Segoe UI", Font.PLAIN, 17));
+    menuBar.add(menuDatei);
 
-    JMenuItem mntmExit = new JMenuItem("Schlieﬂen");
-    mntmExit.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-    mntmExit.addActionListener(new ActionListener() {
+    JMenuItem menuItemSchlieﬂen = new JMenuItem("Schlieﬂen");
+    menuItemSchlieﬂen.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+    menuItemSchlieﬂen.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent arg0) {
         frame.dispatchEvent(new WindowEvent(
             frame, WindowEvent.WINDOW_CLOSING));
       }
     });
-    mnFile.add(mntmExit);
+    menuDatei.add(menuItemSchlieﬂen);
+
+    JMenu menuAktivitaeten = new JMenu("Aktivit‰ten");
+    menuAktivitaeten.setFont(new Font("Segoe UI", Font.PLAIN, 17));
+    menuBar.add(menuAktivitaeten);
+
+    JMenuItem menuItemBearbeiten = new JMenuItem("Bearbeiten");
+    menuItemBearbeiten.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+    menuItemBearbeiten.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent arg0) {
+        ActivityWindow window = new ActivityWindow();
+        window.setVisible(true);
+      }
+    });
+    menuAktivitaeten.add(menuItemBearbeiten);
   }
-  
+
   private void createGui() {
+    frame.setSize(1075, 1051);
+    frame.setContentPane(new CalendarPanel());
+    frame.setVisible(true);
 
   }
 }
