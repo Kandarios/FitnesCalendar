@@ -91,7 +91,7 @@ public class CalendarPanel extends JPanel {
     tblCalendar.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
     //Set row/column count
-    tblCalendar.setRowHeight(145);
+    tblCalendar.setRowHeight(125);
     mtblCalendar.setColumnCount(7);
     mtblCalendar.setRowCount(6);
 

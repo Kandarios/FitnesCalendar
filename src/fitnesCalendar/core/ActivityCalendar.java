@@ -6,7 +6,6 @@ import java.util.List;
 
 import fitnesCalendar.basics.CalendarEntry;
 
-//TODO: make this a singkleton class
 public class ActivityCalendar {
 
   static int currentMonth, currentYear;
@@ -25,9 +24,9 @@ public class ActivityCalendar {
   }
 
   private ActivityCalendar() {
-    GregorianCalendar cal = new GregorianCalendar(); //Create calendar
-    currentMonth  = cal.get(GregorianCalendar.MONTH); //Get month
-    currentYear = cal.get(GregorianCalendar.YEAR); //Get year
+    GregorianCalendar cal = new GregorianCalendar(); 
+    currentMonth  = cal.get(GregorianCalendar.MONTH); 
+    currentYear = cal.get(GregorianCalendar.YEAR); 
     actualDate = LocalDate.of(cal.get(GregorianCalendar.YEAR),  cal.get(GregorianCalendar.MONTH) +1, cal.get(GregorianCalendar.DAY_OF_MONTH));
     System.out.println("Today is: " + actualDate);
     updateCurrentCalendar();  

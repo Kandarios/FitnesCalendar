@@ -60,9 +60,8 @@ public class MainWindow {
   }
 
   private void createGui() {
-    frame.setSize(1075, 1051);
+    frame.setSize(900, 900);
     frame.setContentPane(new CalendarPanel());
     frame.setVisible(true);
-
   }
 }
